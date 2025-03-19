@@ -9,6 +9,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_chroma import Chroma
 import os
+import uvicorn
 
 load_dotenv(override=True)
 
@@ -93,6 +94,6 @@ with gr.Blocks(theme=gr.themes.Glass()) as dashboard:
 
 app = FastAPI()
 mount_gradio_app(app, dashboard, path="/")
-
-port = int(os.environ.get("PORT", 7860))
-dashboard.launch(server_name="0.0.0.0", server_port=port)
+# Run FastAPI server
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 7860)))
