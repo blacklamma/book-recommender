@@ -1,6 +1,4 @@
 import gradio as gr
-from gradio.routes import mount_gradio_app
-from fastapi import FastAPI
 import pandas as pd
 import numpy as np
 from dotenv import load_dotenv
@@ -9,7 +7,6 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_chroma import Chroma
 import os
-import uvicorn
 
 load_dotenv(override=True)
 
@@ -92,8 +89,6 @@ with gr.Blocks(theme=gr.themes.Glass()) as dashboard:
     output = gr.Gallery(label="Recommended Books", rows=2, columns=8)
     submit_button.click(recommend_books, inputs=[user_query, category_dropdown, tone_dropdown], outputs=output)
 
-app = FastAPI()
-mount_gradio_app(app, dashboard, path="/")
-# Run FastAPI server
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 7860)))
+    port = int(os.environ.get("PORT", 7860))
+    dashboard.launch(server_name="0.0.0.0", server_port=port)
