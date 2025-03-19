@@ -1,0 +1,11 @@
+# Ignore all files by default
+**
+
+# But don't ignore these critical files:
+!app.py
+!cover-not-found.jpg
+!books_with_emotions.csv
+!Dockerfile
+!requirements.txt
+!vercel.json
+!tagged_descriptions.txt
