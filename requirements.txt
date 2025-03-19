@@ -1,7 +1,4 @@
-kagglehub
 pandas
-matplotlib
-seaborn
 python-dotenv
 langchain-community
 langchain-openai
@@ -9,5 +6,3 @@ langchain-chroma
 langchain-text-splitters
 transformers
 gradio
-notebook
-ipywidgets
