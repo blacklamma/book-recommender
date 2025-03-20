@@ -7,6 +7,9 @@ from langchain_text_splitters import CharacterTextSplitter
 from langchain_chroma import Chroma
 import gradio as gr
 import os
+import uvicorn
+from fastapi import FastAPI
+from gradio.routes import mount_gradio_app
 
 load_dotenv(override=True)
 
@@ -96,7 +99,8 @@ with gr.Blocks(theme = gr.themes.Glass()) as dashboard:
                         inputs = [user_query, category_dropdown, tone_dropdown],
                         outputs = output)
 
-
+app = FastAPI()
+mount_gradio_app(app, dashboard, path="/")
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 7860))
-    dashboard.launch(server_name="0.0.0.0", server_port=port)
+    port = int(os.environ.get("PORT", 7860))  # Default to 7860 if no PORT variable is set
+    uvicorn.run(app, host="0.0.0.0", port=port)

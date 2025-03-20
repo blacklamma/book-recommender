@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 7860
 
 # Run the app (ensure your app listens on 0.0.0.0)
-CMD ["python", "-m", "gradio", "app.py"]
+CMD ["python", "app.py"]
